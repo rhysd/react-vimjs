@@ -1,0 +1,26 @@
+{
+  "name": "react-vimjs",
+  "version": "0.0.1",
+  "description": "Vim.js component for React.js",
+  "main": "dist/main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "react",
+    "Vim",
+    "component"
+  ],
+  "author": "rhysd <lin90162@yahoo.co.jp>",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/rhysd/react-vimjs.git"
+  },
+  "bugs": {
+    "url": "https://github.com/rhysd/react-vimjs/issues"
+  },
+  "license": "",
+  "devDependencies": {
+    "typescript": "^1.6.2"
+  }
+}
