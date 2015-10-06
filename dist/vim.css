@@ -1,12 +1,9 @@
 /*  vim: set sw=2 ts=2 et : */
 /*
  * vim.css
- * Copyright (c) 2013 Lu Wang <coolwanglu@gmail.com>
+ * Modified: rhysd <lin90162@yahoo.co.jp>
+ * Original: Copyright (c) 2013 Lu Wang <coolwanglu@gmail.com>
  */
-
-body {
-  background-color: #f5f0eb;
-}
 
 #github-star {
   position:absolute;

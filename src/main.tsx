@@ -35,29 +35,29 @@ export default class Vim extends React.Component<Props, State> {
         if (!document.getElementById('vimjs-source')) {
             let script = document.createElement('script');
             script.setAttribute('src', this.props.vimjsPath);
-            script.id = "vimjs-source";
+            script.id = 'vimjs-source'
             document.body.appendChild(script);
         }
     }
 
     render() {
         return (
-            <div className="root">
-                <div id="vimjs-container" className="vimjs-container">
-                    <canvas id="vimjs-canvas"></canvas>
+            <div className='root'>
+                <div id='vimjs-container' className='vimjs-container'>
+                    <canvas id='vimjs-canvas'></canvas>
                     {this.props.children}
                 </div>
-                <audio id="vimjs-beep" src=""></audio>
-                <input id="vimjs-file" className="vimjs-invisible" type="file"/>
-                <div id="vimjs-font-test" className="vimjs-invisible"></div>
-                <div id="vimjs-trigger-dialog" className="modal">
-                    <div className="modal-dialog">
-                        <div className="modal-content">
-                            <div className="modal-header">
-                                <h4 className="modal-title">Ugly workaround for Chrome</h4>
+                <audio id='vimjs-beep' src=''></audio>
+                <input id='vimjs-file' className='vimjs-invisible' type='file'/>
+                <div id='vimjs-font-test' className='vimjs-invisible'></div>
+                <div id='vimjs-trigger-dialog' className='modal'>
+                    <div className='modal-dialog'>
+                        <div className='modal-content'>
+                            <div className='modal-header'>
+                                <h4 className='modal-title'>Ugly workaround for Chrome</h4>
                             </div>
-                            <div className="modal-body">
-                                <button id="vimjs-trigger-button" type="button" className="btn btn-primary">Click Me</button>
+                            <div className='modal-body'>
+                                <button id='vimjs-trigger-button' type='button' className='btn btn-primary'>Click Me</button>
                             </div>
                         </div>
                     </div>
