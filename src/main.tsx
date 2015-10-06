@@ -7,7 +7,7 @@ interface Props {
     children?: React.ReactElement<any>[];
     args?: string[];
     onStart?: () => void;
-    defaultFile: {[path: string]: string};
+    defaultFiles: {[path: string]: string};
 }
 
 interface State {
@@ -15,10 +15,10 @@ interface State {
 
 export default class Vim extends React.Component<Props, State> {
     public static defaultProps = {
-        vimrc: "",
+        vimrc: '',
         args: ['/usr/local/share/vim/example.js'],
         onStart: function(){},
-        defaultFile: {},
+        defaultFiles: {},
     }
 
     constructor(props: Props) {
@@ -41,6 +41,14 @@ export default class Vim extends React.Component<Props, State> {
         document.body.appendChild(script);
     }
 
+    writeDefaultFiles() {
+        for (const name in this.props.defaultFiles) {
+            const content = this.props.defaultFiles[name];
+            const create = (global.Module as {[n: string]: Function})['FS_createDataFile']
+            create('/root', name, content, true, true);
+        }
+    }
+
     prepareModule() {
         global.Module = {
           noInitialRun: false,
@@ -49,6 +57,7 @@ export default class Vim extends React.Component<Props, State> {
           preRun: [
               this.loadVimrc.bind(this),
               function() { vimjs.pre_run(); },
+              this.writeDefaultFiles.bind(this),
               this.props.onStart,
           ],
           postRun: [],

@@ -23,6 +23,13 @@ var Vim = (function (_super) {
         script.id = 'vimjs-source';
         document.body.appendChild(script);
     };
+    Vim.prototype.writeDefaultFiles = function () {
+        for (var name_1 in this.props.defaultFiles) {
+            var content = this.props.defaultFiles[name_1];
+            var create = global.Module['FS_createDataFile'];
+            create('/root', name_1, content, true, true);
+        }
+    };
     Vim.prototype.prepareModule = function () {
         global.Module = {
             noInitialRun: false,
@@ -31,6 +38,7 @@ var Vim = (function (_super) {
             preRun: [
                 this.loadVimrc.bind(this),
                 function () { vimjs.pre_run(); },
+                this.writeDefaultFiles.bind(this),
                 this.props.onStart,
             ],
             postRun: [],
@@ -53,10 +61,10 @@ var Vim = (function (_super) {
         return (React.createElement("div", {"className": 'root'}, React.createElement("div", {"id": 'vimjs-container', "className": 'vimjs-container'}, React.createElement("canvas", {"id": 'vimjs-canvas'}), this.props.children), React.createElement("audio", {"id": 'vimjs-beep', "src": ''}), React.createElement("input", {"id": 'vimjs-file', "className": 'vimjs-invisible', "type": 'file'}), React.createElement("div", {"id": 'vimjs-font-test', "className": 'vimjs-invisible'}), React.createElement("div", {"id": 'vimjs-trigger-dialog', "className": 'modal'}, React.createElement("div", {"className": 'modal-dialog'}, React.createElement("div", {"className": 'modal-content'}, React.createElement("div", {"className": 'modal-header'}, React.createElement("h4", {"className": 'modal-title'}, "Ugly workaround for Chrome")), React.createElement("div", {"className": 'modal-body'}, React.createElement("button", {"id": 'vimjs-trigger-button', "type": 'button', "className": 'btn btn-primary'}, "Click Me")))))));
     };
     Vim.defaultProps = {
-        vimrc: "",
+        vimrc: '',
         args: ['/usr/local/share/vim/example.js'],
         onStart: function () { },
-        defaultFile: {},
+        defaultFiles: {},
     };
     return Vim;
 })(React.Component);
