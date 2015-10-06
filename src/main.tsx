@@ -3,6 +3,7 @@ import * as React from 'react'
 interface Props {
     vimjsPath: string;
     memPath: string;
+    vimrc?: string;
     children?: React.ReactElement<any>[];
 }
 
@@ -10,6 +11,8 @@ interface State {
 }
 
 export default class Vim extends React.Component<Props, State> {
+    public static defaultProps = {vimrc: ""}
+
     constructor(props: Props) {
         super(props);
     }
@@ -31,6 +34,10 @@ export default class Vim extends React.Component<Props, State> {
           },
         };
         global.__vimjs_memory_initializer = this.props.memPath;
+
+        if (this.props.vimrc && typeof localStorage !== 'undefined') {
+            localStorage['vimjs/root/.vimrc'] = this.props.vimrc;
+        }
 
         if (!document.getElementById('vimjs-source')) {
             let script = document.createElement('script');
