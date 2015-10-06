@@ -7,16 +7,33 @@
 
     <link rel="stylesheet" href='http://fonts.googleapis.com/css?family=Source+Code+Pro'>
     <link rel="stylesheet" href="node_modules/react-vimjs/dist/vim.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
 
     <style>
+      body {
+        background-color: #e3e3e3;
+        font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+      }
+      .title, .title * {
+        color: #666666;
+        text-align: center;
+      }
       .main {
-        height: 100%;
-        width: 100%;
+        height: 600px;
+        width: 800px;
+        margin-left: auto;
+        margin-right: auto;
+        text-align: center;
+      }
+      .loading {
+        color: #e3e3e3;
+        line-height: 600px;
       }
     </style>
   </head>
 
   <body>
+    <h1 class="title">react-vimjs example <a href="https://github.com/rhysd/react-vimjs"><i class="fa fa-github"></i><a></h1>
     <div class="main">
     </div>
     <script src="index.js"></script>
