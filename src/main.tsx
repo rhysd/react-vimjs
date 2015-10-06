@@ -5,24 +5,52 @@ interface Props {
     memPath: string;
     vimrc?: string;
     children?: React.ReactElement<any>[];
+    args?: string[];
+    onStart?: () => void;
+    defaultFile: {[path: string]: string};
 }
 
 interface State {
 }
 
 export default class Vim extends React.Component<Props, State> {
-    public static defaultProps = {vimrc: ""}
+    public static defaultProps = {
+        vimrc: "",
+        args: ['/usr/local/share/vim/example.js'],
+        onStart: function(){},
+        defaultFile: {},
+    }
 
     constructor(props: Props) {
         super(props);
     }
 
-    componentDidMount() {
+    loadVimrc() {
+        if (this.props.vimrc && typeof localStorage !== 'undefined') {
+            localStorage['vimjs/root/.vimrc'] = this.props.vimrc;
+        }
+    }
+
+    loadVimJS() {
+        if (document.getElementById('vimjs-source')) {
+            return;
+        }
+        let script = document.createElement('script');
+        script.setAttribute('src', this.props.vimjsPath);
+        script.id = 'vimjs-source'
+        document.body.appendChild(script);
+    }
+
+    prepareModule() {
         global.Module = {
           noInitialRun: false,
           noExitRuntime: true,
-          arguments: ['/usr/local/share/vim/example.js'],
-          preRun: [ function() { vimjs.pre_run(); } ],
+          arguments: this.props.args,
+          preRun: [
+              this.loadVimrc.bind(this),
+              function() { vimjs.pre_run(); },
+              this.props.onStart,
+          ],
           postRun: [],
           print: function() {
               console.group.apply(console, arguments);
@@ -34,17 +62,11 @@ export default class Vim extends React.Component<Props, State> {
           },
         };
         global.__vimjs_memory_initializer = this.props.memPath;
+    }
 
-        if (this.props.vimrc && typeof localStorage !== 'undefined') {
-            localStorage['vimjs/root/.vimrc'] = this.props.vimrc;
-        }
-
-        if (!document.getElementById('vimjs-source')) {
-            let script = document.createElement('script');
-            script.setAttribute('src', this.props.vimjsPath);
-            script.id = 'vimjs-source'
-            document.body.appendChild(script);
-        }
+    componentDidMount() {
+        this.prepareModule();
+        this.loadVimJS();
     }
 
     render() {
