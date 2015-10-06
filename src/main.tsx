@@ -3,6 +3,7 @@ import * as React from 'react'
 interface Props {
     vimjsPath: string;
     memPath: string;
+    children?: React.ReactElement<any>[];
 }
 
 interface State {
@@ -44,12 +45,7 @@ export default class Vim extends React.Component<Props, State> {
             <div className="root">
                 <div id="vimjs-container" className="vimjs-container">
                     <canvas id="vimjs-canvas"></canvas>
-                    <div style={{textAlign: "center"}}>
-                        <div className="vimjs-loading-container">
-                            <div className="vimjs-loading"></div>
-                            <div id="vimjs-loading-text">loading...</div>
-                        </div>
-                    </div>
+                    {this.props.children}
                 </div>
                 <audio id="vimjs-beep" src=""></audio>
                 <input id="vimjs-file" className="vimjs-invisible" type="file"/>
@@ -70,3 +66,4 @@ export default class Vim extends React.Component<Props, State> {
         );
     }
 }
+
