@@ -7,7 +7,8 @@ interface Props {
     children?: React.ReactElement<any>[];
     args?: string[];
     onStart?: () => void;
-    defaultFiles: {[path: string]: string};
+    defaultFiles?: {[path: string]: string};
+    syntax?: {[ft: string]: string};
 }
 
 interface State {
@@ -17,6 +18,7 @@ export default class Vim extends React.Component<Props, State> {
     public static defaultProps = {
         args: ['/usr/local/share/vim/example.js'],
         defaultFiles: {},
+        syntax: {},
     }
 
     constructor(props: Props) {
@@ -39,10 +41,28 @@ export default class Vim extends React.Component<Props, State> {
         document.body.appendChild(script);
     }
 
+    injectSyntax() {
+        if (this.props.syntax === {}) {
+            return;
+        }
+
+        const create = (global.Module as {[n: string]: Function})['FS_createDataFile'];
+
+        for (const ft in this.props.syntax) {
+            const content = this.props.syntax[ft];
+            create('/usr/local/share/vim/syntax', ft + ".vim", content, true, true);
+        }
+    }
+
     writeDefaultFiles() {
+        if (this.props.defaultFiles === {}) {
+            return;
+        }
+
+        const create = (global.Module as {[n: string]: Function})['FS_createDataFile'];
+
         for (const name in this.props.defaultFiles) {
             const content = this.props.defaultFiles[name];
-            const create = (global.Module as {[n: string]: Function})['FS_createDataFile']
             create('/root', name, content, true, true);
         }
     }
@@ -57,6 +77,7 @@ export default class Vim extends React.Component<Props, State> {
                   this.loadVimrc.bind(this);
                   vimjs.pre_run();
                   this.writeDefaultFiles();
+                  this.injectSyntax();
                   if (this.props.onStart) {
                       this.props.onStart();
                   }

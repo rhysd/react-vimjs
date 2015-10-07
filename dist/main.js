@@ -23,10 +23,23 @@ var Vim = (function (_super) {
         script.id = 'vimjs-source';
         document.body.appendChild(script);
     };
+    Vim.prototype.injectSyntax = function () {
+        if (this.props.syntax === {}) {
+            return;
+        }
+        var create = global.Module['FS_createDataFile'];
+        for (var ft in this.props.syntax) {
+            var content = this.props.syntax[ft];
+            create('/usr/local/share/vim/syntax', ft + ".vim", content, true, true);
+        }
+    };
     Vim.prototype.writeDefaultFiles = function () {
+        if (this.props.defaultFiles === {}) {
+            return;
+        }
+        var create = global.Module['FS_createDataFile'];
         for (var name_1 in this.props.defaultFiles) {
             var content = this.props.defaultFiles[name_1];
-            var create = global.Module['FS_createDataFile'];
             create('/root', name_1, content, true, true);
         }
     };
@@ -41,6 +54,7 @@ var Vim = (function (_super) {
                     _this.loadVimrc.bind(_this);
                     vimjs.pre_run();
                     _this.writeDefaultFiles();
+                    _this.injectSyntax();
                     if (_this.props.onStart) {
                         _this.props.onStart();
                     }
@@ -68,6 +82,7 @@ var Vim = (function (_super) {
     Vim.defaultProps = {
         args: ['/usr/local/share/vim/example.js'],
         defaultFiles: {},
+        syntax: {},
     };
     return Vim;
 })(React.Component);

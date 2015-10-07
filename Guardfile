@@ -1,4 +1,4 @@
-ignore /^node_modules/, /^typings/, /^emterpreter/, /^asyncify/, /^streamlinejs/
+ignore /^node_modules/, /^typings/, /^emterpreter/, /^asyncify/, /^streamlinejs/, /^.git/
 
 guard :shell do
   watch %r[^dist/] do |m|
