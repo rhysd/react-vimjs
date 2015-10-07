@@ -26,7 +26,7 @@ export default class Vim extends React.Component<Props, State> {
     }
 
     loadVimrc() {
-        if (this.props.vimrc && typeof localStorage !== 'undefined') {
+        if (this.props.vimrc && typeof localStorage !== 'undefined' && !localStorage['vimjs/root/.vimrc']) {
             localStorage['vimjs/root/.vimrc'] = this.props.vimrc;
         }
     }

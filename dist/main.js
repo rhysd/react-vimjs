@@ -10,7 +10,7 @@ var Vim = (function (_super) {
         _super.call(this, props);
     }
     Vim.prototype.loadVimrc = function () {
-        if (this.props.vimrc && typeof localStorage !== 'undefined') {
+        if (this.props.vimrc && typeof localStorage !== 'undefined' && !localStorage['vimjs/root/.vimrc']) {
             localStorage['vimjs/root/.vimrc'] = this.props.vimrc;
         }
     };

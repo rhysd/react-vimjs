@@ -13,27 +13,36 @@
       body {
         background-color: #e3e3e3;
         font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+        font-size: 14px;
       }
       .title, .title * {
         color: #666666;
         text-align: center;
       }
-      .main {
+      .root {
+        display: -webkit-flex;
+        display: flex;
+        flex-direction: row;
+      }
+      .vim {
         height: 600px;
         width: 800px;
-        margin-left: auto;
-        margin-right: auto;
         text-align: center;
+        flex: none;
       }
       .loading {
         color: #e3e3e3;
         line-height: 600px;
       }
+      .preview {
+        flex: auto;
+        background-color: red;
+      }
     </style>
   </head>
 
   <body>
-    <h1 class="title">react-vimjs example <a href="https://github.com/rhysd/react-vimjs"><i class="fa fa-github"></i><a></h1>
+    <h1 class="title">react-vimjs example <a href="https://github.com/rhysd/react-vimjs"><i class="fa fa-github"></i></a></h1>
     <div class="main">
     </div>
     <script src="index.js"></script>
