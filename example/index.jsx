@@ -21,7 +21,7 @@ class VimMarkdown extends React.Component {
     getVimrc() {
         return `autocmd FileType *.md setlocal ft=markdown
 function s:executeCallBack()
-  if &ft !==# 'markdown'
+  if &ft !=# 'markdown'
     return
   endif
   let buf = join(map(getline(1, '$'), 'escape(v:val, "\\\\!''")'), '\\n')
