@@ -31,15 +31,20 @@ var Vim = (function (_super) {
         }
     };
     Vim.prototype.prepareModule = function () {
+        var _this = this;
         global.Module = {
             noInitialRun: false,
             noExitRuntime: true,
             arguments: this.props.args,
             preRun: [
-                this.loadVimrc.bind(this),
-                function () { vimjs.pre_run(); },
-                this.writeDefaultFiles.bind(this),
-                this.props.onStart,
+                function () {
+                    _this.loadVimrc.bind(_this);
+                    vimjs.pre_run();
+                    _this.writeDefaultFiles();
+                    if (_this.props.onStart) {
+                        _this.props.onStart();
+                    }
+                },
             ],
             postRun: [],
             print: function () {
@@ -61,9 +66,7 @@ var Vim = (function (_super) {
         return (React.createElement("div", {"className": 'root'}, React.createElement("div", {"id": 'vimjs-container', "className": 'vimjs-container'}, React.createElement("canvas", {"id": 'vimjs-canvas'}), this.props.children), React.createElement("audio", {"id": 'vimjs-beep', "src": ''}), React.createElement("input", {"id": 'vimjs-file', "className": 'vimjs-invisible', "type": 'file'}), React.createElement("div", {"id": 'vimjs-font-test', "className": 'vimjs-invisible'}), React.createElement("div", {"id": 'vimjs-trigger-dialog', "className": 'modal'}, React.createElement("div", {"className": 'modal-dialog'}, React.createElement("div", {"className": 'modal-content'}, React.createElement("div", {"className": 'modal-header'}, React.createElement("h4", {"className": 'modal-title'}, "Ugly workaround for Chrome")), React.createElement("div", {"className": 'modal-body'}, React.createElement("button", {"id": 'vimjs-trigger-button', "type": 'button', "className": 'btn btn-primary'}, "Click Me")))))));
     };
     Vim.defaultProps = {
-        vimrc: '',
         args: ['/usr/local/share/vim/example.js'],
-        onStart: function () { },
         defaultFiles: {},
     };
     return Vim;

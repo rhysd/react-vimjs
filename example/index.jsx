@@ -27,7 +27,7 @@ function s:executeCallBack()
   let buf = join(map(getline(1, '$'), 'escape(v:val, "\\\\!''")'), '\\n')
   execute "!ReactVimJSExample.callback('" . buf . "')"
 endfunction
-autocmd TextChanged * call <SID>executeCallBack()`;
+autocmd TextChanged,VimEnter * call <SID>executeCallBack()`;
     }
 
     render() {
@@ -36,6 +36,9 @@ autocmd TextChanged * call <SID>executeCallBack()`;
             memPath: 'node_modules/react-vimjs/dist/vim.js.mem',
             vimrc: this.getVimrc(),
             args: ['test.md'],
+            defaultFiles: {
+                'test.md': 'react-vimjs Markdown Example\n============================\n\nEdit as you **like**!\n'
+            }
         };
 
         return (

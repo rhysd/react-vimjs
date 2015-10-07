@@ -15,9 +15,7 @@ interface State {
 
 export default class Vim extends React.Component<Props, State> {
     public static defaultProps = {
-        vimrc: '',
         args: ['/usr/local/share/vim/example.js'],
-        onStart: function(){},
         defaultFiles: {},
     }
 
@@ -55,10 +53,14 @@ export default class Vim extends React.Component<Props, State> {
           noExitRuntime: true,
           arguments: this.props.args,
           preRun: [
-              this.loadVimrc.bind(this),
-              function() { vimjs.pre_run(); },
-              this.writeDefaultFiles.bind(this),
-              this.props.onStart,
+              () => {
+                  this.loadVimrc.bind(this);
+                  vimjs.pre_run();
+                  this.writeDefaultFiles();
+                  if (this.props.onStart) {
+                      this.props.onStart();
+                  }
+              },
           ],
           postRun: [],
           print: function() {
