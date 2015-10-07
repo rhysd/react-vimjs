@@ -5,6 +5,20 @@ import injectMdHighlight from './highlight_injector'
 
 global.ReactVimJSExample = {};
 
+marked.setOptions({
+    highlight: function(code: string, lang: string): string {
+        if (lang === undefined) {
+            return code;
+        }
+        try {
+            return hljs.highlight(lang, code).value;
+        } catch (e) {
+            return code;
+        }
+    }
+});
+
+
 class VimMarkdown extends React.Component {
     constructor(props) {
         super(props);
