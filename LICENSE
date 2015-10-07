@@ -27,14 +27,12 @@ Below files are licensed differently.
 dist/vim.css
 dist/vim.js
 dist/vim.js.mem
-emterpreter/*
-streamlinejs/*
-asyncify/*
+dist/emterpreter/*
 Copyright (c) 2013 Lu Wang <coolwanglu@gmail.com>
 
 
 
-Vim files 
+Vim files
 Copyright Bram Moolenaar et al.
 Modified by Lu Wang for Vim.js
 
@@ -50,40 +48,3 @@ distribute it.
 
 
 
-streamlinejs/narcissus/* 
-Copyright Mozilla
-Modified by Lu Wang for Vim.js
-
-MPL 1.1/GPL 2.0/LGPL 2.1
-read web/narcissus/LICENSE
-
-
-
-streamlinejs/streamlinejs/*
-streamlinejs/streamline.min.js
-Copyright Bruno Jouhier et al.
-Modified and tailored by Lu Wang for Vim.js
-
-MIT License
-
-
-
-streamlinejs/transform.js: 
-decompiler.js from Narcissus is modified and included
-Copyright (c) 2013 Lu Wang <coolwanglu@gmail.com>
-
-MPL 1.1/GPL 2.0/LGPL 2.1
-
-
-
-emterpreter/usr/local/share/vim/example.js
-Copyright (c) 2013 Lu Wang <coolwanglu@gmail.com>
-
-MIT License
-
-
-
-{emterpreter,streamlinejs,asyncify}/drip.ogg
-Copyright: 1998,99,2000 Free Software Foundation, Inc.
-
-GPL 2.0 or later: http://www.gnu.org/licenses/gpl.html
