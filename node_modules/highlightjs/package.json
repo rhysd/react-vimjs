@@ -1,0 +1,29 @@
+{
+  "name": "highlightjs",
+  "description": "Syntax highlighting for the Web",
+  "version": "8.7.0",
+  "private": false,
+  "gitHead": "519ed08a571ce1c2290d855d08c38c9a1dbf438a",
+  "_id": "highlightjs@8.7.0",
+  "scripts": {},
+  "_shasum": "13397cd8dd8ad7d4cfe77adffb8088a10ee3b708",
+  "_from": "highlightjs@*",
+  "_npmVersion": "2.7.5",
+  "_nodeVersion": "0.12.2",
+  "_npmUser": {
+    "name": "thepauleh",
+    "email": "paul.sellars@rightster.com"
+  },
+  "dist": {
+    "shasum": "13397cd8dd8ad7d4cfe77adffb8088a10ee3b708",
+    "tarball": "http://registry.npmjs.org/highlightjs/-/highlightjs-8.7.0.tgz"
+  },
+  "maintainers": [
+    {
+      "name": "thepauleh",
+      "email": "paul.sellars@rightster.com"
+    }
+  ],
+  "directories": {},
+  "_resolved": "https://registry.npmjs.org/highlightjs/-/highlightjs-8.7.0.tgz"
+}

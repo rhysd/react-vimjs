@@ -1,8 +1,23 @@
 import React from 'react'
 import Vim from 'react-vimjs'
 import marked from 'marked'
+import injectMdHighlight from './highlight_injector'
 
 global.ReactVimJSExample = {};
+
+marked.setOptions({
+    highlight: function(code: string, lang: string): string {
+        if (lang === undefined) {
+            return code;
+        }
+        try {
+            return hljs.highlight(lang, code).value;
+        } catch (e) {
+            return code;
+        }
+    }
+});
+
 
 class VimMarkdown extends React.Component {
     constructor(props) {
@@ -11,7 +26,7 @@ class VimMarkdown extends React.Component {
     }
 
     componentDidMount() {
-        localStorage['vimjs/root/.vimrc'] = this.getVimrc();
+        localStorage['vimjs/root/.vimrc'] = this.getVimrc(); // Temporary
 
         global.ReactVimJSExample.callback = buf => {
             this.setState({buffer: buf});
@@ -19,7 +34,7 @@ class VimMarkdown extends React.Component {
     }
 
     getVimrc() {
-        return `autocmd FileType *.md setlocal ft=markdown
+        return `autocmd BufNewFile,BufReadPost *.md setlocal ft=markdown
 function s:executeCallBack()
   if &ft !=# 'markdown'
     return
@@ -27,7 +42,9 @@ function s:executeCallBack()
   let buf = join(map(getline(1, '$'), 'escape(v:val, "\\\\!''")'), '\\n')
   execute "!ReactVimJSExample.callback('" . buf . "')"
 endfunction
-autocmd TextChanged,VimEnter * call <SID>executeCallBack()`;
+autocmd TextChanged,BufEnter * silent! call <SID>executeCallBack()
+
+" Write your favorite config here.`;
     }
 
     render() {
@@ -37,8 +54,11 @@ autocmd TextChanged,VimEnter * call <SID>executeCallBack()`;
             vimrc: this.getVimrc(),
             args: ['test.md'],
             defaultFiles: {
-                'test.md': 'react-vimjs Markdown Example\n============================\n\nEdit as you **like**!\n'
-            }
+                'test.md': 'react-vimjs Markdown Example\n============================\n\nEdit as you **like**!\n\n```javascript\nconsole.log("Hello, world")\n```\n'
+            },
+            syntax: {
+                'markdown': injectMdHighlight(),
+            },
         };
 
         return (
