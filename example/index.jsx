@@ -42,7 +42,7 @@ function s:executeCallBack()
   let buf = join(map(getline(1, '$'), 'escape(v:val, "\\\\!''")'), '\\n')
   execute "!ReactVimJSExample.callback('" . buf . "')"
 endfunction
-autocmd TextChanged,VimEnter * call <SID>executeCallBack()
+autocmd TextChanged,BufEnter * silent! call <SID>executeCallBack()
 
 " Write your favorite config here.`;
     }
@@ -54,7 +54,7 @@ autocmd TextChanged,VimEnter * call <SID>executeCallBack()
             vimrc: this.getVimrc(),
             args: ['test.md'],
             defaultFiles: {
-                'test.md': 'react-vimjs Markdown Example\n============================\n\nEdit as you **like**!\n'
+                'test.md': 'react-vimjs Markdown Example\n============================\n\nEdit as you **like**!\n\n```javascript\nconsole.log("Hello, world")\n```\n'
             },
             syntax: {
                 'markdown': injectMdHighlight(),
