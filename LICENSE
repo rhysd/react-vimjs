@@ -21,13 +21,16 @@ THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 
 
+Below files are licensed differently.
 
-Vim.js
+
+dist/vim.css
+dist/vim.js
+dist/vim.js.mem
+emterpreter/*
+streamlinejs/*
+asyncify/*
 Copyright (c) 2013 Lu Wang <coolwanglu@gmail.com>
-
-
-
-Files with different licenses are used, read the list carefully:
 
 
 
