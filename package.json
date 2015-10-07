@@ -8,7 +8,9 @@
   "author": "",
   "license": "MIT",
   "dependencies": {
-    "react": "^0.13.3"
+    "github-markdown-css": "^2.0.11",
+    "react": "^0.13.3",
+    "react-vimjs": "^0.0.1"
   },
   "devDependencies": {
     "babel": "^5.8.23",

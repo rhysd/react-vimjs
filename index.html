@@ -8,34 +8,52 @@
     <link rel="stylesheet" href='http://fonts.googleapis.com/css?family=Source+Code+Pro'>
     <link rel="stylesheet" href="node_modules/react-vimjs/dist/vim.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="node_modules/github-markdown-css/github-markdown.css">
 
     <style>
       body {
         background-color: #e3e3e3;
         font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+        font-size: 14px;
       }
       .title, .title * {
         color: #666666;
         text-align: center;
       }
-      .main {
+      .root {
+        display: -webkit-flex;
+        display: flex;
+        flex-direction: row;
+      }
+      .vim {
         height: 600px;
         width: 800px;
-        margin-left: auto;
-        margin-right: auto;
         text-align: center;
+        flex: none;
       }
       .loading {
         color: #e3e3e3;
         line-height: 600px;
       }
+      .preview {
+        flex: auto;
+        border: solid 1px #ddd;
+        background-color: white;
+        padding: 8px;
+      }
+      footer {
+        margin: 8px;
+      }
     </style>
   </head>
 
   <body>
-    <h1 class="title">react-vimjs example <a href="https://github.com/rhysd/react-vimjs"><i class="fa fa-github"></i><a></h1>
+    <h1 class="title">react-vimjs Markdown Example <a href="https://github.com/rhysd/react-vimjs"><i class="fa fa-github"></i></a></h1>
     <div class="main">
     </div>
+    <footer>
+      Created by <a href="https://github.com/rhysd">@rhysd</a>
+    </footer>
     <script src="index.js"></script>
   </body>
 
