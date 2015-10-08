@@ -48,13 +48,27 @@ autocmd TextChanged,BufEnter * silent! call <SID>executeCallBack()
     }
 
     render() {
+
+        const default_text =
+`react-vimjs Markdown Example
+============================
+
+This is an example for [react-vimjs](https://rhysd.github.io/react-vimjs).
+
+**Edit** as you *like*!
+
+\`\`\`javascript
+console.log("Hello, world")
+\`\`\`
+`;
+
         const props = {
             vimjsPath: 'node_modules/react-vimjs/dist/vim.js',
             memPath: 'node_modules/react-vimjs/dist/vim.js.mem',
             vimrc: this.getVimrc(),
             args: ['test.md'],
             defaultFiles: {
-                'test.md': 'react-vimjs Markdown Example\n============================\n\nEdit as you **like**!\n\n```javascript\nconsole.log("Hello, world")\n```\n'
+                'test.md': default_text
             },
             syntax: {
                 'markdown': injectMdHighlight(),
