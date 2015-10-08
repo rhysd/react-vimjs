@@ -1,6 +1,6 @@
 import * as React from 'react'
 
-interface Props {
+export interface Props {
     vimjsPath: string;
     memPath: string;
     vimrc?: string;
@@ -11,10 +11,7 @@ interface Props {
     syntax?: {[ft: string]: string};
 }
 
-interface State {
-}
-
-export default class Vim extends React.Component<Props, State> {
+export default class Vim extends React.Component<Props, {}> {
     public static defaultProps = {
         args: ['/usr/local/share/vim/example.js'],
         defaultFiles: {},
@@ -25,13 +22,13 @@ export default class Vim extends React.Component<Props, State> {
         super(props);
     }
 
-    loadVimrc() {
+    private loadVimrc() {
         if (this.props.vimrc && typeof localStorage !== 'undefined' && !localStorage['vimjs/root/.vimrc']) {
             localStorage['vimjs/root/.vimrc'] = this.props.vimrc;
         }
     }
 
-    loadVimJS() {
+    private loadVimJS() {
         if (document.getElementById('vimjs-source')) {
             return;
         }
@@ -41,7 +38,7 @@ export default class Vim extends React.Component<Props, State> {
         document.body.appendChild(script);
     }
 
-    injectSyntax() {
+    private injectSyntax() {
         if (this.props.syntax === {}) {
             return;
         }
@@ -54,7 +51,7 @@ export default class Vim extends React.Component<Props, State> {
         }
     }
 
-    writeDefaultFiles() {
+    private writeDefaultFiles() {
         if (this.props.defaultFiles === {}) {
             return;
         }
@@ -67,7 +64,7 @@ export default class Vim extends React.Component<Props, State> {
         }
     }
 
-    prepareModule() {
+    private prepareModule() {
         global.Module = {
           noInitialRun: false,
           noExitRuntime: true,
