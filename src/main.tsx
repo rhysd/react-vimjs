@@ -47,7 +47,7 @@ export default class Vim extends React.Component<Props, {}> {
 
         for (const ft in this.props.syntax) {
             const content = this.props.syntax[ft];
-            create('/usr/local/share/vim/syntax', ft + ".vim", content, true, true);
+            create('/usr/local/share/vim/syntax', ft + '.vim', content, true, true);
         }
     }
 
