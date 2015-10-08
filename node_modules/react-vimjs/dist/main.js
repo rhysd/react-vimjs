@@ -30,7 +30,7 @@ var Vim = (function (_super) {
         var create = global.Module['FS_createDataFile'];
         for (var ft in this.props.syntax) {
             var content = this.props.syntax[ft];
-            create('/usr/local/share/vim/syntax', ft + ".vim", content, true, true);
+            create('/usr/local/share/vim/syntax', ft + '.vim', content, true, true);
         }
     };
     Vim.prototype.writeDefaultFiles = function () {
