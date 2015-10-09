@@ -71,7 +71,6 @@ console.log("Hello, world")
         ];
 
         const props = {
-            vimjsPath: 'node_modules/react-vimjs/dist/vim.js',
             memPath: 'node_modules/react-vimjs/dist/vim.js.mem',
             vimrc: this.getVimrc(),
             args: ['test.md'],

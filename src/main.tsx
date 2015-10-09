@@ -7,7 +7,6 @@ export interface FileEntry {
 }
 
 export interface Props {
-    vimjsPath: string;
     memPath: string;
     vimrc?: string;
     children?: React.ReactElement<any>[];
@@ -88,16 +87,6 @@ export default class Vim extends React.Component<Props, {}> {
         }
     }
 
-    private loadVimJS() {
-        if (document.getElementById('vimjs-source')) {
-            return;
-        }
-        let script = document.createElement('script');
-        script.setAttribute('src', this.props.vimjsPath);
-        script.id = 'vimjs-source'
-        document.body.appendChild(script);
-    }
-
     private writeFiles() {
         if (this.props.files === []) {
             return;
@@ -140,7 +129,6 @@ export default class Vim extends React.Component<Props, {}> {
 
     componentDidMount() {
         this.prepareModule();
-        this.loadVimJS();
     }
 
     render() {
