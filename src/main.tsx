@@ -60,11 +60,11 @@ export class FileUpload extends React.Component<FWProps, {}> {
 
     render() {
         return (
-            <div className="vim-file-writer" onClick={this.launchFileChooser.bind(this)}>
+            <div className='vim-file-writer' onClick={this.launchFileChooser.bind(this)}>
                 <div>
                     {this.props.children}
                 </div>
-                <input className="hidden-uploader" type="file" ref="uploader"/>
+                <input className='hidden-uploader' type='file' ref='uploader'/>
             </div>
         );
     }

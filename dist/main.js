@@ -39,7 +39,7 @@ var FileUpload = (function (_super) {
         });
     };
     FileUpload.prototype.render = function () {
-        return (React.createElement("div", {"className": "vim-file-writer", "onClick": this.launchFileChooser.bind(this)}, React.createElement("div", null, this.props.children), React.createElement("input", {"className": "hidden-uploader", "type": "file", "ref": "uploader"})));
+        return (React.createElement("div", {"className": 'vim-file-writer', "onClick": this.launchFileChooser.bind(this)}, React.createElement("div", null, this.props.children), React.createElement("input", {"className": 'hidden-uploader', "type": 'file', "ref": 'uploader'})));
     };
     return FileUpload;
 })(React.Component);
