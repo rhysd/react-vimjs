@@ -1,5 +1,5 @@
 import React from 'react'
-import Vim from 'react-vimjs'
+import Vim, {FileUpload} from 'react-vimjs'
 import marked from 'marked'
 import injectMdHighlight from './highlight_injector'
 
@@ -47,6 +47,10 @@ autocmd TextChanged,BufEnter * silent! call <SID>executeCallBack()
 " Write your favorite config here.`;
     }
 
+    onFileUpload(parent, name) {
+        alert(`Wrote to '${parent}/${name}'\n\nOpen with ':edit ${name}'`);
+    }
+
     render() {
 
         const default_text =
@@ -75,14 +79,21 @@ console.log("Hello, world")
         };
 
         return (
-            <div className="root">
+            <div className="vim-markdown">
                 <div className="vim">
-                    <Vim {...props}>
+                    <Vim {...props} ref="vim">
                         <h1 className="loading"><i className="fa fa-spinner fa-pulse" /> Now Loading...</h1>
                     </Vim>
                 </div>
-                <div className="preview markdown-body">
-                    <span dangerouslySetInnerHTML={{__html: marked(this.state.buffer)}}/>
+                <div className="preview ">
+                    <FileUpload onUpload={this.onFileUpload}>
+                        <button className="local-edit-button" type="button">
+                            <i className="fa fa-pencil-square-o"/> Edit Local File
+                        </button>
+                    </FileUpload>
+                    <div className="markdown-body">
+                        <span dangerouslySetInnerHTML={{__html: marked(this.state.buffer)}}/>
+                    </div>
                 </div>
             </div>
         );

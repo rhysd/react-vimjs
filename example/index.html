@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1, user-scalable=yes" />
-    <title>react-vimjs-example</title>
+    <title>react-vimjs Markdown Example</title>
 
     <link rel="stylesheet" href='http://fonts.googleapis.com/css?family=Source+Code+Pro'>
     <link rel="stylesheet" href="node_modules/react-vimjs/dist/vim.css">
@@ -21,7 +21,7 @@
         color: #666666;
         text-align: center;
       }
-      .root {
+      .vim-markdown {
         display: -webkit-flex;
         display: flex;
         flex-direction: row;
@@ -29,6 +29,7 @@
       .vim {
         text-align: center;
         flex: none;
+        font-family: "Source Code Pro", monospace;
       }
       .loading {
         color: #e3e3e3;
@@ -36,12 +37,23 @@
       }
       .preview {
         flex: auto;
-        border: solid 1px #ddd;
-        background-color: white;
         padding: 8px;
+        background-color: white;
+        border: solid 1px #ddd;
+      }
+      .local-file-button {
+        border-radius: 0.2em;
+        padding: 2px;
+        margin: 2px;
       }
       footer {
-        margin: 8px;
+        margin: 8px 0px;
+        padding: 4px 8px;
+        border-radius: 4px;
+        background-color: #cccccc;
+        color: #777777;
+        text-align: center;
+        font-size: x-small;
       }
       .avatar {
         height: 1.2em;
@@ -58,7 +70,12 @@
     <div class="main">
     </div>
     <footer>
-      Created by <a href="https://github.com/rhysd"><img class="avatar" src="https://avatars2.githubusercontent.com/u/823277?v=3" alt="@rhysd"/></a>
+      <p>
+        Created by <a href="https://github.com/rhysd"><img class="avatar" src="https://avatars2.githubusercontent.com/u/823277?v=3" alt="@rhysd"/></a>
+      </p>
+      <p>
+        Copyright &copy; 2015 rhysd
+      </p>
     </footer>
     <script src="node_modules/highlightjs/highlight.pack.min.js"></script>
     <script src="index.js"></script>
