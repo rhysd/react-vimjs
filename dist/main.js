@@ -89,7 +89,7 @@ var Vim = (function (_super) {
                     }
                 },
             ],
-            postRun: [],
+            postRun: this.props.onDestroy ? [this.props.onDestroy] : [],
             print: function () {
                 console.group.apply(console, arguments);
                 console.groupEnd();

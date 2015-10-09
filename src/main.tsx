@@ -13,6 +13,7 @@ export interface Props {
     children?: React.ReactElement<any>[];
     args?: string[];
     onStart?: () => void;
+    onDestroy?: () => void;
     files?: FileEntry[];
     beep?: string;
 }
@@ -23,7 +24,7 @@ export function writeFileToFS(file: FileEntry) {
 }
 
 export interface FWProps {
-    onUpload?: (parent: string, name: string): void;
+    onUpload?: (parent: string, name: string) => void;
     children?: React.ReactElement<any>[];
 }
 
@@ -124,7 +125,7 @@ export default class Vim extends React.Component<Props, {}> {
                   }
               },
           ],
-          postRun: [],
+          postRun: this.props.onDestroy ? [this.props.onDestroy] : [],
           print: function() {
               console.group.apply(console, arguments);
               console.groupEnd();
