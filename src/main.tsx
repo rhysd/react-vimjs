@@ -14,12 +14,67 @@ export interface Props {
     args?: string[];
     onStart?: () => void;
     files?: FileEntry[];
+    beep?: string;
+}
+
+export function writeFileToFS(file: FileEntry) {
+    const create = (global.Module as {[n: string]: Function})['FS_createDataFile'];
+    create(file.parent, file.name, file.content, true, true);
+}
+
+export interface FWProps {
+    onUpload?: (parent: string, name: string): void;
+    children?: React.ReactElement<any>[];
+}
+
+export class FileUpload extends React.Component<FWProps, {}> {
+    constructor(props: FWProps) {
+        super(props);
+    }
+
+    private getUploader() {
+        return React.findDOMNode(this.refs['uploader']) as HTMLInputElement;
+    }
+
+    private launchFileChooser() {
+        this.getUploader().click();
+    }
+
+    componentDidMount() {
+        this.getUploader().addEventListener('change', (event: Event) => {
+            const file = (event.target as HTMLInputElement).files[0];
+            let reader = new FileReader();
+            reader.onload = (e: any) => {
+                writeFileToFS({
+                    parent: '/root',
+                    name: file.name,
+                    content: e.target.result
+                });
+                if (this.props.onUpload) {
+                    this.props.onUpload('/root', file.name);
+                }
+            };
+            reader.readAsText(file);
+        });
+    }
+
+    render() {
+        return (
+            <div className="vim-file-writer" onClick={this.launchFileChooser.bind(this)}>
+                <div>
+                    {this.props.children}
+                </div>
+                <input className="hidden-uploader" type="file" ref="uploader"/>
+            </div>
+        );
+    }
 }
 
 export default class Vim extends React.Component<Props, {}> {
     public static defaultProps = {
         args: ['/usr/local/share/vim/example.js'],
         files: [] as FileEntry[],
+        beep: '',
     }
 
     constructor(props: Props) {
@@ -94,7 +149,7 @@ export default class Vim extends React.Component<Props, {}> {
                     <canvas id='vimjs-canvas'></canvas>
                     {this.props.children}
                 </div>
-                <audio id='vimjs-beep' src=''></audio>
+                <audio id='vimjs-beep' src={this.props.beep}></audio>
                 <input id='vimjs-file' className='vimjs-invisible' type='file'/>
                 <div id='vimjs-font-test' className='vimjs-invisible'></div>
                 <div id='vimjs-trigger-dialog' className='modal'>

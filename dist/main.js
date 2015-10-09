@@ -4,6 +4,46 @@ var __extends = (this && this.__extends) || function (d, b) {
     d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 };
 var React = require('react');
+function writeFileToFS(file) {
+    var create = global.Module['FS_createDataFile'];
+    create(file.parent, file.name, file.content, true, true);
+}
+exports.writeFileToFS = writeFileToFS;
+var FileUpload = (function (_super) {
+    __extends(FileUpload, _super);
+    function FileUpload(props) {
+        _super.call(this, props);
+    }
+    FileUpload.prototype.getUploader = function () {
+        return React.findDOMNode(this.refs['uploader']);
+    };
+    FileUpload.prototype.launchFileChooser = function () {
+        this.getUploader().click();
+    };
+    FileUpload.prototype.componentDidMount = function () {
+        var _this = this;
+        this.getUploader().addEventListener('change', function (event) {
+            var file = event.target.files[0];
+            var reader = new FileReader();
+            reader.onload = function (e) {
+                writeFileToFS({
+                    parent: '/root',
+                    name: file.name,
+                    content: e.target.result
+                });
+                if (_this.props.onUpload) {
+                    _this.props.onUpload('/root', file.name);
+                }
+            };
+            reader.readAsText(file);
+        });
+    };
+    FileUpload.prototype.render = function () {
+        return (React.createElement("div", {"className": "vim-file-writer", "onClick": this.launchFileChooser.bind(this)}, React.createElement("div", null, this.props.children), React.createElement("input", {"className": "hidden-uploader", "type": "file", "ref": "uploader"})));
+    };
+    return FileUpload;
+})(React.Component);
+exports.FileUpload = FileUpload;
 var Vim = (function (_super) {
     __extends(Vim, _super);
     function Vim(props) {
@@ -66,11 +106,12 @@ var Vim = (function (_super) {
         this.loadVimJS();
     };
     Vim.prototype.render = function () {
-        return (React.createElement("div", {"className": 'root'}, React.createElement("div", {"id": 'vimjs-container', "className": 'vimjs-container'}, React.createElement("canvas", {"id": 'vimjs-canvas'}), this.props.children), React.createElement("audio", {"id": 'vimjs-beep', "src": ''}), React.createElement("input", {"id": 'vimjs-file', "className": 'vimjs-invisible', "type": 'file'}), React.createElement("div", {"id": 'vimjs-font-test', "className": 'vimjs-invisible'}), React.createElement("div", {"id": 'vimjs-trigger-dialog', "className": 'modal'}, React.createElement("div", {"className": 'modal-dialog'}, React.createElement("div", {"className": 'modal-content'}, React.createElement("div", {"className": 'modal-header'}, React.createElement("h4", {"className": 'modal-title'}, "Ugly workaround for Chrome")), React.createElement("div", {"className": 'modal-body'}, React.createElement("button", {"id": 'vimjs-trigger-button', "type": 'button', "className": 'btn btn-primary'}, "Click Me")))))));
+        return (React.createElement("div", {"className": 'root'}, React.createElement("div", {"id": 'vimjs-container', "className": 'vimjs-container'}, React.createElement("canvas", {"id": 'vimjs-canvas'}), this.props.children), React.createElement("audio", {"id": 'vimjs-beep', "src": this.props.beep}), React.createElement("input", {"id": 'vimjs-file', "className": 'vimjs-invisible', "type": 'file'}), React.createElement("div", {"id": 'vimjs-font-test', "className": 'vimjs-invisible'}), React.createElement("div", {"id": 'vimjs-trigger-dialog', "className": 'modal'}, React.createElement("div", {"className": 'modal-dialog'}, React.createElement("div", {"className": 'modal-content'}, React.createElement("div", {"className": 'modal-header'}, React.createElement("h4", {"className": 'modal-title'}, "Ugly workaround for Chrome")), React.createElement("div", {"className": 'modal-body'}, React.createElement("button", {"id": 'vimjs-trigger-button', "type": 'button', "className": 'btn btn-primary'}, "Click Me")))))));
     };
     Vim.defaultProps = {
         args: ['/usr/local/share/vim/example.js'],
         files: [],
+        beep: '',
     };
     return Vim;
 })(React.Component);
