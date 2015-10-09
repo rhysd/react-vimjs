@@ -1,5 +1,11 @@
 import * as React from 'react'
 
+export interface FileEntry {
+    parent: string;
+    name: string;
+    content: string;
+}
+
 export interface Props {
     vimjsPath: string;
     memPath: string;
@@ -7,15 +13,13 @@ export interface Props {
     children?: React.ReactElement<any>[];
     args?: string[];
     onStart?: () => void;
-    defaultFiles?: {[path: string]: string};
-    syntax?: {[ft: string]: string};
+    files?: FileEntry[];
 }
 
 export default class Vim extends React.Component<Props, {}> {
     public static defaultProps = {
         args: ['/usr/local/share/vim/example.js'],
-        defaultFiles: {},
-        syntax: {},
+        files: [] as FileEntry[],
     }
 
     constructor(props: Props) {
@@ -38,29 +42,15 @@ export default class Vim extends React.Component<Props, {}> {
         document.body.appendChild(script);
     }
 
-    private injectSyntax() {
-        if (this.props.syntax === {}) {
+    private writeFiles() {
+        if (this.props.files === []) {
             return;
         }
 
         const create = (global.Module as {[n: string]: Function})['FS_createDataFile'];
 
-        for (const ft in this.props.syntax) {
-            const content = this.props.syntax[ft];
-            create('/usr/local/share/vim/syntax', ft + '.vim', content, true, true);
-        }
-    }
-
-    private writeDefaultFiles() {
-        if (this.props.defaultFiles === {}) {
-            return;
-        }
-
-        const create = (global.Module as {[n: string]: Function})['FS_createDataFile'];
-
-        for (const name in this.props.defaultFiles) {
-            const content = this.props.defaultFiles[name];
-            create('/root', name, content, true, true);
+        for (const entry of this.props.files) {
+            create(entry.parent, entry.name, entry.content, true, true);
         }
     }
 
@@ -73,8 +63,7 @@ export default class Vim extends React.Component<Props, {}> {
               () => {
                   this.loadVimrc.bind(this);
                   vimjs.pre_run();
-                  this.writeDefaultFiles();
-                  this.injectSyntax();
+                  this.writeFiles();
                   if (this.props.onStart) {
                       this.props.onStart();
                   }

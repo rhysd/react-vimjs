@@ -61,18 +61,17 @@ This is an example for [react-vimjs](https://rhysd.github.io/react-vimjs).
 console.log("Hello, world")
 \`\`\`
 `;
+        const files = [
+            {parent: '/usr/local/share/vim/syntax', name: 'markdown.vim', content: injectMdHighlight()},
+            {parent: '/root', name: 'test.md', content: default_text},
+        ];
 
         const props = {
             vimjsPath: 'node_modules/react-vimjs/dist/vim.js',
             memPath: 'node_modules/react-vimjs/dist/vim.js.mem',
             vimrc: this.getVimrc(),
             args: ['test.md'],
-            defaultFiles: {
-                'test.md': default_text
-            },
-            syntax: {
-                'markdown': injectMdHighlight(),
-            },
+            files: files,
         };
 
         return (
