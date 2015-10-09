@@ -6,7 +6,7 @@
  */
 
 #vimjs-container {
-  font-family: "Source Code Pro";
+  font-family: "Source Code Pro", monospace;
   padding:0;
   overflow:hidden;
   width:800px;
@@ -57,3 +57,6 @@
   margin-right:auto;
 }
 
+.hidden-uploader {
+  display: none;
+}
