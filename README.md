@@ -22,7 +22,7 @@ You can use `<Vim>` component.
 import Vim from 'react-vimjs'
 
 React.render(
-  <Vim memPath="path/to/vim.js.mem"> Loading... </Vim>,
+  <Vim memPath="path/to/dist/vim.js.mem"> Loading... </Vim>,
   document.body
 );
 ```
@@ -34,12 +34,12 @@ React.render(
   <head>
     <meta charset="utf-8" />
     <title>Hello, react-vimjs</title>
-    <link rel="stylesheet" href="node_modules/react-vimjs/dist/vim.css">
+    <link rel="stylesheet" href="path/to/dist/vim.css">
   </head>
   <body>
   </body>
   <script src="path/to/index.js"></script>
-  <script src="path/to/vim.js"></script>
+  <script src="path/to/dist/vim.js"></script>
 </html>
 ```
 
