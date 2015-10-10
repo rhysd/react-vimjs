@@ -39,7 +39,7 @@ function s:executeCallBack()
   if &ft !=# 'markdown'
     return
   endif
-  let buf = join(map(getline(1, '$'), 'escape(v:val, "\\\\!''")'), '\\n')
+  let buf = join(map(getline(1, '$'), 'escape(v:val, "\\\\!''#%")'), '\\n')
   execute "!ReactVimJSExample.callback('" . buf . "')"
 endfunction
 autocmd TextChanged,BufEnter * silent! call <SID>executeCallBack()
@@ -74,7 +74,7 @@ console.log("Hello, world")
             memPath: 'node_modules/react-vimjs/dist/vim.js.mem',
             vimrc: this.getVimrc(),
             args: ['test.md'],
-            files: files,
+            files: files
         };
 
         return (
