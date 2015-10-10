@@ -1,5 +1,7 @@
-/emterpreter
-/asyncify
-/streamlinejs
 /Guardfile
 /example
+/.npmignore
+/.travis.yml
+/tsd.json
+/tslint.json
+/typings
