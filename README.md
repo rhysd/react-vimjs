@@ -1,4 +1,4 @@
-React TRUE Vim Component
+![React TRUE Vim Component](https://raw.githubusercontent.com/rhysd/react-vimjs/master/misc/react-vimjs-bannar.jpg)
 ========================
 [![Build Status](https://travis-ci.org/rhysd/react-vimjs.svg)](https://travis-ci.org/rhysd/react-vimjs)
 
