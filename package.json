@@ -19,7 +19,7 @@
   "bugs": {
     "url": "https://github.com/rhysd/react-vimjs/issues"
   },
-  "license": "",
+  "license": "MIT",
   "devDependencies": {
     "typescript": "^1.6.2"
   }

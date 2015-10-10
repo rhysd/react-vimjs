@@ -8,7 +8,11 @@ Please try [Markdown Demo](http://rhysd.github.io/react-vimjs/).  The source cod
 
 ## Install
 
-Not yet.
+Install via [npm](https://www.npmjs.com).
+
+```
+$ npm install react-vimjs
+```
 
 ## Usage
 
@@ -70,4 +74,6 @@ React.render(
 
 Children of `<FileUpload>` component gets clickable.  When clicked, `<input>` file chooser is launched and you can select a file.  If `onUpload` property is set, it is called with the path to loaded file after loading the file is success.  When `blah.txt` is selected, `/root/blah.txt` is created in Emscripten filesystem and you can open it with `:edit blah.txt`.
 
+### Known Issues
 
+- In Chrome of OS X, the screen collapses. Safari is OK.
