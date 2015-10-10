@@ -9,8 +9,8 @@ export interface Props {
     vimrc?: string;
     children?: React.ReactElement<any>[];
     args?: string[];
-    onStart?: () => void;
-    onDestroy?: () => void;
+    willStart?: () => void;
+    didStart?: () => void;
     files?: FileEntry[];
     beep?: string;
 }
@@ -24,7 +24,7 @@ export declare class FileUpload extends React.Component<FWProps, {}> {
     private getUploader();
     private launchFileChooser();
     componentDidMount(): void;
-    render(): JSX.Element;
+    render(): any;
 }
 export default class Vim extends React.Component<Props, {}> {
     static defaultProps: {
@@ -37,5 +37,5 @@ export default class Vim extends React.Component<Props, {}> {
     private writeFiles();
     private prepareModule();
     componentDidMount(): void;
-    render(): JSX.Element;
+    render(): any;
 }
