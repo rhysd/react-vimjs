@@ -1,6 +1,6 @@
 {
   "name": "react-vimjs",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "Vim.js component for React.js",
   "main": "dist/main.js",
   "scripts": {
