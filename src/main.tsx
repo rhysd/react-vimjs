@@ -11,8 +11,8 @@ export interface Props {
     vimrc?: string;
     children?: React.ReactElement<any>[];
     args?: string[];
-    onStart?: () => void;
-    onDestroy?: () => void;
+    willStart?: () => void;
+    didStart?: () => void;
     files?: FileEntry[];
     beep?: string;
 }
@@ -109,12 +109,18 @@ export default class Vim extends React.Component<Props, {}> {
                   this.loadVimrc.bind(this);
                   vimjs.pre_run();
                   this.writeFiles();
-                  if (this.props.onStart) {
-                      this.props.onStart();
+                  if (this.props.willStart) {
+                      this.props.willStart();
                   }
               },
           ],
-          postRun: this.props.onDestroy ? [this.props.onDestroy] : [],
+          postRun: [
+              () => {
+                  if (this.props.didStart) {
+                      this.props.didStart();
+                  }
+              }
+          ],
           print: function() {
               console.group.apply(console, arguments);
               console.groupEnd();

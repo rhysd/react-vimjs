@@ -74,7 +74,7 @@ console.log("Hello, world")
             memPath: 'node_modules/react-vimjs/dist/vim.js.mem',
             vimrc: this.getVimrc(),
             args: ['test.md'],
-            files: files,
+            files: files
         };
 
         return (

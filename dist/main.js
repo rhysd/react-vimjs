@@ -75,12 +75,18 @@ var Vim = (function (_super) {
                     _this.loadVimrc.bind(_this);
                     vimjs.pre_run();
                     _this.writeFiles();
-                    if (_this.props.onStart) {
-                        _this.props.onStart();
+                    if (_this.props.willStart) {
+                        _this.props.willStart();
                     }
                 },
             ],
-            postRun: this.props.onDestroy ? [this.props.onDestroy] : [],
+            postRun: [
+                function () {
+                    if (_this.props.didStart) {
+                        _this.props.didStart();
+                    }
+                }
+            ],
             print: function () {
                 console.group.apply(console, arguments);
                 console.groupEnd();
