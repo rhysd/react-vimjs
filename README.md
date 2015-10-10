@@ -23,6 +23,7 @@ You can use `<Vim>` component.
 - `index.js`
 
 ```javascript
+import React from 'react'
 import Vim from 'react-vimjs'
 
 React.render(
@@ -74,6 +75,3 @@ React.render(
 
 Children of `<FileUpload>` component gets clickable.  When clicked, `<input>` file chooser is launched and you can select a file.  If `onUpload` property is set, it is called with the path to loaded file after loading the file is success.  When `blah.txt` is selected, `/root/blah.txt` is created in Emscripten filesystem and you can open it with `:edit blah.txt`.
 
-### Known Issues
-
-- In Chrome of OS X, the screen collapses. Safari is OK.
