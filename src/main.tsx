@@ -126,6 +126,7 @@ export default class Vim extends React.Component<Props, {}> {
               () => {
                   this.loadVimrc.bind(this);
                   vimjs.pre_run();
+                  this.writeDirs();
                   this.writeFiles();
                   if (this.props.willStart) {
                       this.props.willStart();
