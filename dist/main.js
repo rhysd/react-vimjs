@@ -84,6 +84,7 @@ var Vim = (function (_super) {
                 function () {
                     _this.loadVimrc.bind(_this);
                     vimjs.pre_run();
+                    _this.writeDirs();
                     _this.writeFiles();
                     if (_this.props.willStart) {
                         _this.props.willStart();
