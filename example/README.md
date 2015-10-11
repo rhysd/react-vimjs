@@ -8,6 +8,5 @@ This is an example of react-vimjs.  You can edit markdown file with Vim and the 
 ```bash
 $ npm install
 $ ./node_modules/.bin/browserify -t babelify -d -o index.js index.jsx
-$ ./node_modules/.bin/uglifyjs -o index.min.js index.js
 $ # And then host this directory and open with browser.
 ```
