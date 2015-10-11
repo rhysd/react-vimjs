@@ -6,6 +6,11 @@ export interface FileEntry {
     content: string;
 }
 
+export interface DirEntry {
+    parent: string;
+    name: string;
+}
+
 export interface Props {
     memPath: string;
     vimrc?: string;
@@ -14,6 +19,7 @@ export interface Props {
     willStart?: () => void;
     didStart?: () => void;
     files?: FileEntry[];
+    dirs?: DirEntry[];
     beep?: string;
 }
 
@@ -74,6 +80,7 @@ export default class Vim extends React.Component<Props, {}> {
     public static defaultProps = {
         args: ['/usr/local/share/vim/example.js'],
         files: [] as FileEntry[],
+        dirs: [] as DirEntry[],
         beep: '',
     }
 
@@ -84,6 +91,17 @@ export default class Vim extends React.Component<Props, {}> {
     private loadVimrc() {
         if (this.props.vimrc && typeof localStorage !== 'undefined' && !localStorage['vimjs/root/.vimrc']) {
             localStorage['vimjs/root/.vimrc'] = this.props.vimrc;
+        }
+    }
+
+    private writeDirs() {
+        if (this.props.dirs === []) {
+            return;
+        }
+
+        const create = (global.Module as {[n: string]: Function})['FS_createPath'];
+        for (const d of this.props.dirs) {
+            create(d.parent, d.name, true, true);
         }
     }
 

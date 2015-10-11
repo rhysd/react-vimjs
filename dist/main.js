@@ -54,6 +54,16 @@ var Vim = (function (_super) {
             localStorage['vimjs/root/.vimrc'] = this.props.vimrc;
         }
     };
+    Vim.prototype.writeDirs = function () {
+        if (this.props.dirs === []) {
+            return;
+        }
+        var create = global.Module['FS_createPath'];
+        for (var _i = 0, _a = this.props.dirs; _i < _a.length; _i++) {
+            var d = _a[_i];
+            create(d.parent, d.name, true, true);
+        }
+    };
     Vim.prototype.writeFiles = function () {
         if (this.props.files === []) {
             return;
@@ -102,20 +112,12 @@ var Vim = (function (_super) {
         this.prepareModule();
     };
     Vim.prototype.render = function () {
-        var font_test_style = {
-            fontStyle: 'normal',
-            fontVariant: 'normal',
-            fontWeight: 'normal',
-            fontStretch: 'normal',
-            fontSize: '12px',
-            lineHeight: 'normal',
-            fontFamily: 'monospace',
-        };
         return (React.createElement("div", {"className": 'root'}, React.createElement("div", {"id": 'vimjs-container', "className": 'vimjs-container'}, React.createElement("canvas", {"id": 'vimjs-canvas'}), this.props.children), React.createElement("audio", {"id": 'vimjs-beep', "src": this.props.beep}), React.createElement("input", {"id": 'vimjs-file', "className": 'vimjs-invisible', "type": 'file'}), React.createElement("div", {"id": 'vimjs-font-test', "className": 'vimjs-invisible'}, "m"), React.createElement("div", {"id": 'vimjs-trigger-dialog', "className": 'modal'}, React.createElement("div", {"className": 'modal-dialog'}, React.createElement("div", {"className": 'modal-content'}, React.createElement("div", {"className": 'modal-header'}, React.createElement("h4", {"className": 'modal-title'}, "Ugly workaround for Chrome")), React.createElement("div", {"className": 'modal-body'}, React.createElement("button", {"id": 'vimjs-trigger-button', "type": 'button', "className": 'btn btn-primary'}, "Click Me")))))));
     };
     Vim.defaultProps = {
         args: ['/usr/local/share/vim/example.js'],
         files: [],
+        dirs: [],
         beep: '',
     };
     return Vim;
