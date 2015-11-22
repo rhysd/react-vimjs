@@ -157,7 +157,7 @@ export default class Vim extends React.Component<Props, {}> {
     }
 
     render() {
-        const font_test_props = {
+        const font_test_style = {
             fontStyle: 'normal',
             fontVariant: 'normal',
             fontWeight: 'normal',
@@ -175,7 +175,7 @@ export default class Vim extends React.Component<Props, {}> {
                 </div>
                 <audio id='vimjs-beep' src={this.props.beep}></audio>
                 <input id='vimjs-file' className='vimjs-invisible' type='file'/>
-                <div id='vimjs-font-test' className='vimjs-invisible' {...font_test_props}>m</div>
+                <div id='vimjs-font-test' className='vimjs-invisible' style={font_test_style}>m</div>
                 <div id='vimjs-trigger-dialog' className='modal'>
                     <div className='modal-dialog'>
                         <div className='modal-content'>
