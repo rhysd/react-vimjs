@@ -3,7 +3,7 @@ node_js:
     - "stable"
 sudo: false
 install:
-    - npm install -g tslint tsd
+    - npm install -g tslint tsd typescript
     - npm install
     - tsd install
     - tslint --version
